@@ -1,0 +1,20 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "curly": "off",
+    "comma-dangle": "off",
+    "indent": "off",
+    "multiline-ternary": "off",
+    "no-undef": "error",
+    "no-unused-vars": "error",
+    "prettier/prettier": "off",
+    "semi": "off",
+    "space-before-function-paren": "off",
+    "react/display-name": "off",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-native/no-inline-styles": "off"
+  }
+}

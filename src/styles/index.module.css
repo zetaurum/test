@@ -1,0 +1,20 @@
+.main {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background-color: #212121;
+  color: blanchedalmond;
+}
+
+.footer {
+  padding: 1rem;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #111111;
+  color: bisque;
+  text-transform: uppercase;
+}

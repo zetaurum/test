@@ -1,0 +1,12 @@
+{
+  "editor.comments.insertSpace": true,
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "prettier.singleQuote": true,
+  "prettier.printWidth": 80,
+  "prettier.tabWidth": 2,
+  "prettier.arrowParens": "avoid",
+  "prettier.trailingComma": "none",
+  "vscode-graphql.useSchemaFileDefinition": true
+}

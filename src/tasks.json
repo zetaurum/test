@@ -1,0 +1,10 @@
+[
+  {
+    "taskName": "Example task",
+    "createdAt": "2021-09-01T07:00:00",
+    "startsAt": "2021-09-02T09:00:00",
+    "deadLine": "2021-09-03T09:00:00",
+    "completedAt": null,
+    "description": "Just an example task"
+  }
+]
