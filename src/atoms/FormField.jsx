@@ -29,7 +29,7 @@ const FormField = ({
     <FormControl 
       id={id} 
       isRequired={isRequired}
-      isInvalid={isRequired && errors?.type === 'required'}
+      isInvalid={errors}
     >
       <FormLabel>{label}</FormLabel>
       <Input {...inputProps} />

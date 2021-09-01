@@ -3,29 +3,30 @@ import {
   Button, 
   Container, 
   Flex, 
-  FormControl, 
-  FormLabel, 
-  Input, 
   Stack
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 
+import { EMAIL } from 'constants/regularExpressions'
 import FormField from 'atoms/FormField'
+import useAuthentication from 'hooks/useAuthentication'
 
 const SignIn = () => {
   const { 
     register, 
     handleSubmit, 
     formState : {
-      isValid,
       errors
     }
   } = useForm({
     mode: 'onBlur'
   })
+  const {login} = useAuthentication()
 
-  const onSubmit = () => {}
-  console.log('f', isValid, errors)
+  const onSubmit = (values) => {
+    login(values)
+  }
+
   return (
     <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,7 +36,13 @@ const SignIn = () => {
             label='Email'
             isRequired
             inputProps={{
-              ...register('email', { required: 'This field is required.' }),
+              ...register('email', { 
+                required: 'This field is required.',
+                pattern: {
+                  value: EMAIL,
+                  message: 'Must be a valid email.'
+                }
+              }),
               type: 'email'
             }}
             errors={errors?.email}
