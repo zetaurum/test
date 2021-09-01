@@ -1,34 +1,49 @@
-import React from 'react'
-import { 
-  Button, 
-  Container, 
-  Flex, 
+import { useState } from 'react'
+import {
+  Button,
+  Container,
+  Flex,
   Stack
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/dist/client/router'
 
 import { EMAIL } from 'constants/regularExpressions'
 import FormField from 'atoms/FormField'
+import ErrorMessage from 'atoms/ErrorMessage'
+import Header from 'atoms/Header'
 import useAuthentication from 'hooks/useAuthentication'
 
 const SignIn = () => {
-  const { 
-    register, 
-    handleSubmit, 
-    formState : {
-      errors
-    }
+  const [error, setError] = useState(null)
+  const router = useRouter()
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
   } = useForm({
     mode: 'onBlur'
   })
-  const {login} = useAuthentication()
+  const { login } = useAuthentication()
 
-  const onSubmit = (values) => {
-    login(values)
+  const onSubmit = async values => {
+    try {
+      await login(values)
+      router.replace('/tasks')
+    } catch (error) {
+      setError(error)
+    }
   }
 
   return (
-    <Container>
+    <Container mt={4}>
+      <Header>
+        Sign In
+      </Header>
+      {error && (
+        <ErrorMessage>{error}</ErrorMessage>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Stack spacing={4}>
           <FormField
@@ -36,7 +51,7 @@ const SignIn = () => {
             label='Email'
             isRequired
             inputProps={{
-              ...register('email', { 
+              ...register('email', {
                 required: 'Email is required.',
                 pattern: {
                   value: EMAIL,
@@ -58,7 +73,9 @@ const SignIn = () => {
             errors={errors?.password}
           />
           <Flex justifyContent='flex-end'>
-            <Button colorScheme='teal' type='submit'>Sign in</Button>
+            <Button colorScheme='teal' type='submit'>
+              Sign in
+            </Button>
           </Flex>
         </Stack>
       </form>

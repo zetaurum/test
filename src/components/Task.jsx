@@ -14,7 +14,6 @@ import moment from 'moment'
 
 import useTasks from 'hooks/useTasks'
 import { useRouter } from 'next/dist/client/router'
-import TaskForm from './TaskForm'
 import TrashIcon from 'assets/trash.svg'
 import EditIcon from 'assets/edit.svg'
 import CheckMarkIcon from 'assets/check-mark.svg'
@@ -36,17 +35,9 @@ const DATE_TIME_FORMAT = 'DD MMM YYYY HH:mm a'
  * }}
  */
 const Task = ({ task }) => {
-  const {
-    id,
-    taskName,
-    description,
-    startsAt,
-    createdAt,
-    completedAt,
-    deadLine
-  } = task
-
   const router = useRouter()
+  const { id, taskName, description, createdAt, completedAt, deadLine } = task
+
   const { toggleTaskComplete, removeTask } = useTasks()
 
   const isCompleted = !!completedAt
@@ -56,29 +47,20 @@ const Task = ({ task }) => {
   }
 
   return (
-    <AccordionItem>
+    <AccordionItem opacity={isCompleted ? 0.6 : 1}>
       <AccordionButton>
-        <Flex
-          justifyContent='space-between'
-          opacity={isCompleted ? 0.6 : 1}
-          width='100%'
-        >
+        <Flex justifyContent='space-between' width='100%'>
           <Checkbox size='lg' onChange={handleChange} colorScheme='teal'>
             <Text as={isCompleted ? 's' : undefined}>{taskName}</Text>
           </Checkbox>
           <Flex alignItems='center'>
-            <TaskForm
-              task={task}
-              trigger={
-                <Tooltip label='Edit' placement='top'>
-                  <IconButton
-                    onClick={() => router.push(`/tasks/?taskId=${id}`)}
-                    aria-label='Edit task'
-                    icon={<Image width={16} alt='edit task' src={EditIcon} />}
-                  />
-                </Tooltip>
-              }
-            />
+            <Tooltip label='Edit' placement='top'>
+              <IconButton
+                onClick={() => router.push(`/tasks/${id}`)}
+                aria-label='Edit task'
+                icon={<Image width={16} alt='edit task' src={EditIcon} />}
+              />
+            </Tooltip>
             <Tooltip label='Remove' placement='top'>
               <IconButton
                 onClick={() => removeTask(id)}
@@ -99,16 +81,8 @@ const Task = ({ task }) => {
         <Text color='gray.700' mb={2}>
           {description}
         </Text>
-        {isCompleted && (
-          <Flex alignItems='center' mb={2}>
-            <Image width={16} height={16} src={CheckMarkIcon} alt='completed' />
-            <Text ml={2} fontSize='sm' color='#09cb57'>
-              {moment(completedAt).format(DATE_TIME_FORMAT)}
-            </Text>
-          </Flex>
-        )}
         {deadLine && (
-          <Flex alignItems='center'>
+          <Flex alignItems='center' mb={2}>
             <Image
               width={16}
               height={16}
@@ -117,6 +91,14 @@ const Task = ({ task }) => {
             />
             <Text ml={2} fontSize='sm' color='red'>
               {moment(deadLine).format(DATE_TIME_FORMAT)}
+            </Text>
+          </Flex>
+        )}
+        {isCompleted && (
+          <Flex alignItems='center'>
+            <Image width={16} height={16} src={CheckMarkIcon} alt='completed' />
+            <Text ml={2} fontSize='sm' color='#09cb57'>
+              {moment(completedAt).format(DATE_TIME_FORMAT)}
             </Text>
           </Flex>
         )}

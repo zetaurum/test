@@ -7,7 +7,7 @@ import useAuthentication from 'hooks/useAuthentication'
 const HomePage: NextPage = () => {
   const router = useRouter()
   const { isAuthenticated } = useAuthentication()
-
+  
   if(isAuthenticated) router.replace('/tasks')
   
   return <SignIn/>

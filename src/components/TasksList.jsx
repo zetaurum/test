@@ -1,7 +1,6 @@
 import { Accordion, Center, Stack, Text } from '@chakra-ui/react'
 
 import useTasks from 'hooks/useTasks'
-import moment from 'moment'
 import { sortByDate } from '../utils/sortFunctions'
 import Task from './Task'
 

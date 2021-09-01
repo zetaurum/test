@@ -1,26 +1,7 @@
 import { createState, useState } from '@hookstate/core'
 import { v4 as uuid } from 'uuid'
 
-const TASKS_STATE = createState([
-  {
-      "id": "96fb61a8-e862-4ca3-8305-406a374f0457",
-      "taskName": "task 1",
-      "createdAt": "2021-09-01T16:13:00.068Z",
-      "startsAt": "2021-09-07T23:44",
-      "deadLine": "2021-09-23T00:45",
-      "completedAt": null,
-      "description": "as;ldkjfa;sldkjf ;alskdj f;laskdj flkjs ldkjfl skdjfl ksjdlfk jsldkfj slkdjf lsdkjf lsdkjfl skdjfl sjkdlfk jsdlfk jsldkfj sdlkfj "
-  },
-  {
-      "id": "ae861190-9254-4b9e-a110-b6452804fbcf",
-      "taskName": "task 2`",
-      "createdAt": "2021-09-01T17:13:11.129Z",
-      "startsAt": null,
-      "deadLine": null,
-      "completedAt": null,
-      "description": "as;ldkjfa;sldkjf ;alskdj f;laskdj flkjs ldkjfl skdjfl ksjdlfk jsldkfj slkdjf lsdkjf lsdkjfl skdjfl sjkdlfk jsdlfk jsldkfj sdlkfj "
-  }
-])
+const TASKS_STATE = createState([])
 
 export default function useTasks () {
   const tasksState = useState(TASKS_STATE)
@@ -70,6 +51,11 @@ export default function useTasks () {
     })
   }
 
+  const getTask = taskId => {
+    const tasks = tasksState.get()
+    return tasks.find(({id}) => id === taskId)
+  }
+
   const tasks = [...tasksState.get()]
 
   return {
@@ -77,6 +63,7 @@ export default function useTasks () {
     updateTask,
     removeTask,
     toggleTaskComplete,
+    getTask,
     tasks
   }
 }

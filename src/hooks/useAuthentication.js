@@ -17,17 +17,17 @@ const USERS = [
   }
 ]
 
+const WRONG_CREDENTIALS_ERROR_MESSAGE = 'Wrong credentials'
+const AUTHENTICATION_LOCAL_STORAGE_KEY = 'auth_key'
+
 const INITIAL_STATE = {
 	isLoading: true,
 	isAuthenticated: false,
 	user: null
 }
 
-const WRONG_CREDENTIALS_ERROR_MESSAGE = 'Wrong credentials'
-
 const AUTH_STATE = createState(INITIAL_STATE)
 
-const AUTHENTICATION_LOCAL_STORAGE_KEY = 'auth_key'
 
 export default function useAuthentication () {
   const router = useRouter()
@@ -42,8 +42,7 @@ export default function useAuthentication () {
         isAuthenticated: false,
         user: null
       })
-      router.replace('/')
-      return 
+      return router.replace('/')
     } 
 
     const user = USERS.find(({id}) => id === userId)
@@ -54,14 +53,13 @@ export default function useAuthentication () {
     })
   }
 
-  const login = ({email, password}) => {
+  const login = ({email, password}) => new Promise((resolve, reject) => {
     const user = USERS.find((user) => user.email === email)
-
-    if(!user) throw new Error(WRONG_CREDENTIALS_ERROR_MESSAGE)
-
+    if(!user) return reject(WRONG_CREDENTIALS_ERROR_MESSAGE)
+    
     const isCorrectPassword = bcrypt.compareSync(password, user.password)
     if(!isCorrectPassword) {
-      throw new Error(WRONG_CREDENTIALS_ERROR_MESSAGE)
+      return reject(WRONG_CREDENTIALS_ERROR_MESSAGE)
     }
 
     localStorage.setItem(AUTHENTICATION_LOCAL_STORAGE_KEY, user.id)
@@ -70,8 +68,8 @@ export default function useAuthentication () {
       isAuthenticated: true,
       user
     })
-    router.replace('/tasks')
-  }
+    resolve()
+  })
 
   const logout = () => {
     localStorage.removeItem(AUTHENTICATION_LOCAL_STORAGE_KEY)

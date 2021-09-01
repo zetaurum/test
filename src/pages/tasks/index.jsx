@@ -1,14 +1,19 @@
 import { Button, Container, Flex } from '@chakra-ui/react'
-import TaskForm from 'components/TaskForm'
-import TasksList from '../../components/TasksList'
+import { useRouter } from 'next/dist/client/router'
+
+import TasksList from 'components/TasksList'
 
 const Tasks = () => {
+  const router = useRouter()
+
   return (
     <Container>
       <Flex justifyContent='flex-end' width='100%'>
-        <TaskForm trigger={<Button colorScheme='teal'>Add Task</Button>} />
+        <Button colorScheme='teal' onClick={() => router.push('/tasks/create')}>
+          Add Task
+        </Button>
       </Flex>
-      <TasksList/>
+      <TasksList />
     </Container>
   )
 }
