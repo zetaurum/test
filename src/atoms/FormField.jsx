@@ -2,7 +2,8 @@ import {
   FormControl, 
   FormLabel, 
   Input, 
-  Text 
+  Text, 
+  Textarea
 } from '@chakra-ui/react'
 import React from 'react'
 
@@ -25,6 +26,10 @@ const FormField = ({
   inputProps,
   errors
 }) => {
+  const InputComponent = inputProps.type === 'textarea'
+  ? Textarea
+  : Input
+
   return (
     <FormControl 
       id={id} 
@@ -32,7 +37,7 @@ const FormField = ({
       isInvalid={errors}
     >
       <FormLabel>{label}</FormLabel>
-      <Input {...inputProps} />
+      <InputComponent {...inputProps} />
       {errors?.message && (
         <Text
           fontSize='sm'

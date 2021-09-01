@@ -8,7 +8,7 @@ const HomePage: NextPage = () => {
   const router = useRouter()
   const { isAuthenticated } = useAuthentication()
 
-  if(isAuthenticated) router.replace('/todos')
+  if(isAuthenticated) router.replace('/tasks')
   
   return <SignIn/>
 };

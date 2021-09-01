@@ -37,7 +37,7 @@ const SignIn = () => {
             isRequired
             inputProps={{
               ...register('email', { 
-                required: 'This field is required.',
+                required: 'Email is required.',
                 pattern: {
                   value: EMAIL,
                   message: 'Must be a valid email.'
@@ -52,7 +52,7 @@ const SignIn = () => {
             label='Password'
             isRequired
             inputProps={{
-              ...register('password', { required: 'This field is required.' }),
+              ...register('password', { required: 'Password is required.' }),
               type: 'password'
             }}
             errors={errors?.password}

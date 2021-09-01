@@ -70,7 +70,7 @@ export default function useAuthentication () {
       isAuthenticated: true,
       user
     })
-    router.replace('/todos')
+    router.replace('/tasks')
   }
 
   const logout = () => {
