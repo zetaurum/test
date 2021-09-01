@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <Box
-      bg='teal.100'
+      bg='gray.100'
       height={16}
     >
       <Flex
@@ -22,7 +22,7 @@ const Navbar = () => {
         mx='auto'
       >
         <Text
-          color='blue.500'
+          color='teal'
           fontWeight='bold'
           cursor='pointer'
           onClick={() => router.push('/')}
@@ -30,7 +30,7 @@ const Navbar = () => {
           TODO APP
         </Text>
         {isAuthenticated ? (
-          <Text color='blue.500' cursor='pointer' onClick={logout}>
+          <Text color='teal' cursor='pointer' onClick={logout}>
             Logout
           </Text>
         ) : (

@@ -6,7 +6,7 @@ const Tasks = () => {
   return (
     <Container>
       <Flex justifyContent='flex-end' width='100%'>
-        <TaskForm trigger={<Button colorScheme='teal'>Add Todo</Button>} />
+        <TaskForm trigger={<Button colorScheme='teal'>Add Task</Button>} />
       </Flex>
       <TasksList/>
     </Container>

@@ -17,26 +17,31 @@ import useTasks from 'hooks/useTasks'
  *  onClose: () => void
  * }}
  */
-const TaskForm = ({ taskId, onClose }) => {
+const TaskForm = ({ task, onClose }) => {
+  const { addTask, updateTask } = useTasks()
+
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm({
-    mode: 'onBlur'
+    mode: 'onBlur',
+    defaultValues: task
   })
 
-  const { addTask } = useTasks()
-
-  const onSubmit = (values) => {
-    addTask(values)
+  const onSubmit = values => {
+    if (task) {
+      updateTask(task.id, values)
+    } else {
+      addTask(values)
+    }
     onClose()
   }
 
   return (
     <>
       <ModalBody>
-        <form >
+        <form>
           <Stack spacing={4}>
             <FormField
               id='taskName'
@@ -57,14 +62,34 @@ const TaskForm = ({ taskId, onClose }) => {
                 type: 'textarea'
               }}
             />
+            <FormField
+              id='startsAt'
+              label='Starts At'
+              inputProps={{
+                ...register('startsAt'),
+                type: 'datetime-local'
+              }}
+            />
+            <FormField
+              id='deadLine'
+              label='Deadline'
+              inputProps={{
+                ...register('deadLine'),
+                type: 'datetime-local'
+              }}
+            />
           </Stack>
         </form>
       </ModalBody>
       <ModalFooter>
-        <ButtonGroup>
+        <ButtonGroup spacing={4}>
           <Button onClick={onClose}>Cancel</Button>
-          <Button onClick={handleSubmit(onSubmit)} type='submit' colorScheme='teal'>
-            {taskId ? 'Update' : 'Add'}
+          <Button
+            onClick={handleSubmit(onSubmit)}
+            type='submit'
+            colorScheme='teal'
+          >
+            {task ? 'Update' : 'Add'}
           </Button>
         </ButtonGroup>
       </ModalFooter>

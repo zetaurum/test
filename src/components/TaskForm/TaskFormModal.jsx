@@ -8,33 +8,37 @@ import {
   useDisclosure,
   Center
 } from '@chakra-ui/react'
-import { useEffect } from 'react'
 
-import useUrlParams from 'hooks/useUrlParams'
 import TaskForm from './TaskForm'
+import { useRouter } from 'next/dist/client/router'
 
-const TaskFormModal = ({ trigger }) => {
+const TaskFormModal = ({ trigger, task }) => {
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure(true)
 
-  const { taskId } = useUrlParams(['taskId'])
-  
-  useEffect(() => {
-    if(taskId) onOpen()
-  }, [taskId])
+  const header = task ? 'Edit task' : 'Add task'
 
-  const header = taskId ? 'Edit task' : 'Add task'
+  const onModalClose = () => {
+    onClose()
+    if (task) router.push('/tasks')
+  }
+
+  const handleTriggerClick = e => {
+    onOpen()
+    e.stopPropagation()
+  }
 
   return (
     <>
-      <Box onClick={onOpen}>{trigger}</Box>
-      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+      <Box onClick={handleTriggerClick}>{trigger}</Box>
+      <Modal isCentered isOpen={isOpen} onClose={onModalClose}>
         <ModalOverlay />
         <ModalContent>
           <Center>
             <ModalHeader whiteSpace='nowrap'>{header}</ModalHeader>
           </Center>
           <ModalCloseButton />
-          <TaskForm taskId={taskId} onClose={onClose}/>
+          <TaskForm task={task} onClose={onModalClose} />
         </ModalContent>
       </Modal>
     </>

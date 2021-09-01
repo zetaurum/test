@@ -1,0 +1,6 @@
+const SORT_ORDER = {
+  ASCENDING: 'ASCENDING',
+  DESCENDING: 'DESCENDING'
+}
+
+export default SORT_ORDER

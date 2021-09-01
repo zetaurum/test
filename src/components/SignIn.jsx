@@ -58,7 +58,7 @@ const SignIn = () => {
             errors={errors?.password}
           />
           <Flex justifyContent='flex-end'>
-            <Button type='submit'>Sign in</Button>
+            <Button colorScheme='teal' type='submit'>Sign in</Button>
           </Flex>
         </Stack>
       </form>
