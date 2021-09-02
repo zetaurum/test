@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <Box
       bg='gray.100'
-      height={16}
+      minHeight={16}
     >
       <Flex
         height='100%'

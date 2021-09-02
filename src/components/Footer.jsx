@@ -3,7 +3,7 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <Center height={32} bg='gray.100'>
+    <Center minHeight={32} bg='gray.100'>
       <Text fontWeight='bold'>TODO APP &copy; 
       <Text as='span' fontWeight='normal' ml={1}>{new Date().getFullYear()}</Text>
     </Text>

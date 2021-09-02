@@ -11,7 +11,7 @@ import React from 'react'
  * @params {{
  *  id: string,
  *  label: string,
- *  isRequired: boolean,
+ *  isRequired?: boolean,
  *  inputProps: object,
  *  errors?: {
  *    type: string,

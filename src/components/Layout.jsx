@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Center, Flex, Spinner } from '@chakra-ui/react'
 
 import Navbar from 'components/Navbar'
